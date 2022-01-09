@@ -5,6 +5,7 @@ public class Graph<T> extends HashMap implements Map {
 	private HashMap<T, GraphNodeList<T>> graph = new HashMap<>();
 	private ArrayList<T> nodeList = new ArrayList<>();
 	
+	
 	public void addNode(T nodeValue, GraphNodeList<T> adjacencyList){
 		graph.put(nodeValue, adjacencyList);
 		nodeList.add(nodeValue);
