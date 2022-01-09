@@ -1,18 +1,39 @@
+/**
+ * @author Sayan Paul
+ * Connect me on <a href="https://www.linkedin.com/in/sayanpaul17/">Linked In</a>
+ * Part of a mini project.
+ */
+
+package matrix;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This is a Class implementing some matrix functionalities. The Matrix can only hold double type.
+ */
 public class Matrix {
 	
 	private int M, N;
 	private double[][] matrix;
 	
+	/**
+	 * Creates a matrix of zeroes with dimension M ✕ N.
+	 * @param M
+	 * @param N
+	 */
 	public Matrix(int M, int N){
 		this.M = M;
 		this.N = N;
 		matrix = new double[this.M][this.N];
 	}
 	
+	/**
+	 * Creates a matrix of the given value with dimension M ✕ N.
+	 * @param M
+	 * @param N
+	 * @param val
+	 */
 	public Matrix(int M, int N, double val){
 		this.M = M;
 		this.N = N;
@@ -24,24 +45,47 @@ public class Matrix {
 		}
 	}
 	
+	/**
+	 * Creates a matrix from the given 2-D array.
+	 * @param rows
+	 */
 	public Matrix(double[][] rows){
 		this.M = rows.length;
 		this.N = rows[0].length;
 		this.matrix = rows;
 	}
 	
+	/**
+	 * Returns the number of rows.
+	 * @return
+	 */
 	public int getNoOfRows() {
 		return M;
 	}
 	
+	/**
+	 * Returns the number of columns.
+	 * @return
+	 */
 	public int getNoOfColumns(){
 		return N;
 	}
 	
+	/**
+	 * Returns the element at the given position (i,j).
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	public double get(int i, int j){
 		return matrix[i][j];
 	}
 	
+	/**
+	 * Returns the row at the given index.
+	 * @param row
+	 * @return
+	 */
 	public List<Double> getRow(int row){
 		List<Double> list = new ArrayList<>();
 		for(int i=0; i<this.N; ++i){
@@ -50,6 +94,11 @@ public class Matrix {
 		return list;
 	}
 	
+	/**
+	 * Returns the column at the given index.
+	 * @param col
+	 * @return
+	 */
 	public List<Double> getColumn(int col){
 		List<Double> list = new ArrayList<>();
 		for(int i=0; i<this.M; ++i){
@@ -58,10 +107,20 @@ public class Matrix {
 		return list;
 	}
 	
+	/**
+	 * Sets the value at the given position (i,j) to the given value.
+	 * @param i
+	 * @param j
+	 * @param value
+	 */
 	public void set(int i, int j, double value){
 		matrix[i][j] = value;
 	}
 	
+	/**
+	 * Sets the values of all positions to the given value.
+	 * @param val
+	 */
 	public void setAll(double val){
 		for(int i=0; i<M; ++i){
 			for(int j=0; j<N; ++j){
@@ -70,48 +129,78 @@ public class Matrix {
 		}
 	}
 	
-	public void fillNumberRow(int row, double num) throws IndexOutOfBoundsException{
+	/**
+	 * Fills the given row, with the value provided.
+	 * @param row
+	 * @param value
+	 * @throws IndexOutOfBoundsException
+	 */
+	public void fillNumberRow(int row, double value) throws IndexOutOfBoundsException{
 		
 		if(row > this.M)
 			throw new IndexOutOfBoundsException();
 		
 		for(int i = 0; i< M; ++i){
-			matrix[row][i] = num;
+			matrix[row][i] = value;
 		}
 	}
 	
-	public void fillNumberRowForNonZero(int row, double num) throws IndexOutOfBoundsException{
+	/**
+	 * Replaces all the non-zero elements of the given row, with the value provided.
+	 * @param row
+	 * @param value
+	 * @throws IndexOutOfBoundsException
+	 */
+	public void fillNumberRowForNonZero(int row, double value) throws IndexOutOfBoundsException{
 		
 		if(row > this.M)
 			throw new IndexOutOfBoundsException();
 		
 		for(int i = 0; i< M; ++i){
 			if(matrix[row][i] != 0)
-				matrix[row][i] = num;
+				matrix[row][i] = value;
 		}
 	}
 	
-	public void fillNumberColumn(int col, double num) throws IndexOutOfBoundsException{
+	/**
+	 * Fills the given column, with the value provided.
+	 * @param col
+	 * @param value
+	 * @throws IndexOutOfBoundsException
+	 */
+	public void fillNumberColumn(int col, double value) throws IndexOutOfBoundsException{
 		
 		if(col > this.N)
 			throw new IndexOutOfBoundsException();
 		
 		for(int i = 0; i< N; ++i){
-			matrix[i][col] = num;
+			matrix[i][col] = value;
 		}
 	}
 	
-	public void fillNumberColumnForNonZero(int col, double num) throws IndexOutOfBoundsException{
+	/**
+	 * Replaces all the non-zero elements of the given column, with the value provided.
+	 * @param col
+	 * @param value
+	 * @throws IndexOutOfBoundsException
+	 */
+	public void fillNumberColumnForNonZero(int col, double value) throws IndexOutOfBoundsException{
 		
 		if(col > this.N)
 			throw new IndexOutOfBoundsException();
 		
 		for(int i = 0; i< N; ++i){
 			if(matrix[i][col] != 0)
-				matrix[i][col] = num;
+				matrix[i][col] = value;
 		}
 	}
 	
+	/**
+	 * Adds with this matrix object and returns the matrix.
+	 * @param M     Matrix to be added to this Matrix Object.
+	 * @return
+	 * @throws Exception    if the matrix dimensions are incompatible for addition.
+	 */
 	public Matrix add(Matrix M) throws Exception {
 		
 		if(this.M != M.M || this.N != M.N)
@@ -128,6 +217,12 @@ public class Matrix {
 		return result;
 	}
 	
+	/**
+	 * Multiplies with this matrix object and returns the matrix.
+	 * @param M     Matrix to be multiplied to this Matrix Object.
+	 * @return
+	 * @throws Exception    if the matrix dimensions are incompatible for multiplication.
+	 */
 	public Matrix multiply(Matrix M) throws Exception {
 		
 		if(this.N != M.M)
@@ -146,6 +241,11 @@ public class Matrix {
 		return result;
 	}
 	
+	/**
+	 * Multiplies the matrix with the given constant.
+	 * @param num
+	 * @return
+	 */
 	public Matrix multiply(double num){
 		Matrix result = this;
 		for(int i=0; i<result.M; ++i) {
@@ -156,6 +256,13 @@ public class Matrix {
 		return result;
 	}
 	
+	/**
+	 * Adds the two matrices.
+	 * @param M1
+	 * @param M2
+	 * @return
+	 * @throws Exception    if the matrix dimensions are incompatible for addition.
+	 */
 	public static Matrix add(Matrix M1, Matrix M2) throws Exception {
 		
 		if(M1.M != M2.M || M1.N != M2.N)
@@ -172,6 +279,13 @@ public class Matrix {
 		return result;
 	}
 	
+	/**
+	 * Multiplies the two matrices
+	 * @param M1
+	 * @param M2
+	 * @return
+	 * @throws Exception    if the matrix dimensions are incompatible for multiplication.
+	 */
 	public static Matrix multiply(Matrix M1, Matrix M2) throws Exception {
 		
 		if(M1.N != M2.M)
